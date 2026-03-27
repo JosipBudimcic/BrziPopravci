@@ -22,7 +22,7 @@ function App() {
         <Route path={RouteNames.SMJEROVI_PROMJENA} element={<SmjerPromjena />} />
       </Routes>
       <hr />
-      &copy; Edunova
+      &copy; Josip
     </Container>
   )
 }

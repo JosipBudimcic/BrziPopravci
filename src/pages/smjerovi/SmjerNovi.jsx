@@ -49,7 +49,7 @@ export default function SmjerNovi(){
             </Form.Group>
 
             <Form.Group controlId="datumPokretanja">
-                <Form.Label>Datum pokretanja smjera</Form.Label>
+                <Form.Label>Datum pokretanja popravka</Form.Label>
                 <Form.Control type="date" name="datumPokretanja" />
             </Form.Group>
 
@@ -67,7 +67,7 @@ export default function SmjerNovi(){
                 </Col>
                 <Col>
                     <Button type="submit" variant="success">
-                        Dodaj novi smjer
+                        Dodaj novi popravak
                     </Button>
                 </Col>
             </Row>

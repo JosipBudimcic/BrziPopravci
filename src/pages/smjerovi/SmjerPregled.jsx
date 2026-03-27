@@ -32,7 +32,7 @@ export default function SmjerPregled() {
         <>
             <Link to={RouteNames.SMJEROVI_NOVI} 
             className="btn btn-success w-100 mb-3 mt-3">
-                Dodavanje novog smjera
+                Pregled i dodavanje novog popravka
             </Link>
             <Table>
                 <thead>
