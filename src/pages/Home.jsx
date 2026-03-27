@@ -4,10 +4,13 @@ export default function Home(){
     return(
     <>
     <h1>Dobrodošli na {IME_APLIKACIJE}</h1>
-    <div>
-        Ovdje dođe slika
-        
-    </div>
+   <div>
+              <img 
+          src="public\popravci.jpg" 
+          alt="Opis slike" 
+          style={{ maxWidth: '100%', height: 'auto' }} 
+        />
+      </div>
     </>
     )
 }
