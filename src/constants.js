@@ -2,7 +2,7 @@ export const IME_APLIKACIJE='Brzi popravci'
 
 export const RouteNames = {
     HOME: '/',
-    SMJEROVI: '/popravci', // ovo je ruta
-    SMJEROVI_NOVI: '/popravci/novi',
-    SMJEROVI_PROMJENA: '/popravci/:sifra'
+    POPRAVCI: '/popravci', // ovo je ruta
+    POPRAVCI_NOVI: '/popravci/novi',
+    POPRAVCI_PROMJENA: '/popravci/:sifra'
 }

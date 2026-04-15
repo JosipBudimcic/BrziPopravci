@@ -1,36 +1,45 @@
 import { useEffect, useState } from "react"
-import SmjerService from "../../services/smjerovi/SmjerService"
+import popravakService from "../../services/popravci/PopravakService"
 import { Table, Button } from "react-bootstrap"
 import { NumericFormat } from "react-number-format"
 import { GrValidate } from "react-icons/gr"
 import FormatDatuma from "../../components/FormatDatuma"
 import { Link, useNavigate } from "react-router-dom"
 import { RouteNames } from "../../constants"
+import PopravakService from "../../services/popravci/PopravakService"
 
-export default function SmjerPregled() {
+export default function PopravakPregled() {
 
     const navigate = useNavigate()
-    const [smjerovi, setSmjerovi] = useState([])
+    const [popravci, setPopravci] = useState([])
 
 
     useEffect(() => {
-        ucitajSmjerove()
+        ucitajPopravke()
     }, [])
 
-    async function ucitajSmjerove() {
-        await SmjerService.get().then((odgovor) => {
+    async function ucitajPopravke() {
+        await popravakService.get().then((odgovor) => {
 
             // u dev modu (na našem računalu) ispisati će dva puta, sve će biti u redu u produkciji
           //  console.table(odgovor.data)
 
-            setSmjerovi(odgovor.data)
+            setPopravci(odgovor.data)
         })
+    }
+
+    async function brisanje(sifra) {
+        if(!confirm('Sigurno obrisati')){
+            return
+        }
+        await PopravakService.obrisi(sifra)
+        ucitajPopravke()
     }
 
 
     return (
         <>
-            <Link to={RouteNames.SMJEROVI_NOVI} 
+            <Link to={RouteNames.POPRAVCI_NOVI} 
             className="btn btn-success w-100 mb-3 mt-3">
                 Pregled i dodavanje novog popravka
             </Link>
@@ -46,13 +55,13 @@ export default function SmjerPregled() {
                     </tr>
                 </thead>
                 <tbody>
-                    {smjerovi && smjerovi.map((smjer) => (
-                        <tr key={smjer.sifra}>
-                            <td>{smjer.naziv}</td>
-                            <td>{smjer.trajanje}</td>
+                    {popravci && popravci.map((popravak) => (
+                        <tr key={popravak.sifra}>
+                            <td>{popravak.naziv}</td>
+                            <td>{popravak.trajanje}</td>
                             <td>
                                 <NumericFormat
-                                    value={smjer.cijena}
+                                    value={popravak.cijena}
                                     displayType={'text'}
                                     thousandSeparator='.'
                                     decimalSeparator=','
@@ -62,18 +71,22 @@ export default function SmjerPregled() {
                                 />
                             </td>
                             <td>
-                                <FormatDatuma datum={smjer.datumPokretanja} />
+                                <FormatDatuma datum={popravak.datumPokretanja} />
                             </td>
                             <td>
                                 <GrValidate
                                     size={25}
-                                    color={smjer.aktivan ? 'green' : 'red'}
+                                    color={popravak.aktivan ? 'green' : 'red'}
                                 />
                             </td>
                             <td>
-                                <Button onClick={()=>{navigate(`/smjerovi/${smjer.sifra}`)}}>
+                                <Button onClick={()=>{navigate(`/popravci/${popravak.sifra}`)}}>
                                     Promjena
                                 </Button>
+                                 &nbsp;&nbsp;
+                            <Button variant="danger" onClick={() => brisanje(popravak.sifra)}>
+                                Obriši
+                            </Button>
                             </td>
                         </tr>
                     ))}

@@ -1,38 +1,38 @@
 import { Button, Col, Form, Row } from "react-bootstrap";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { RouteNames } from "../../constants";
-import SmjerService from "../../services/smjerovi/SmjerService";
+import PopravakService from "../../services/popravci/PopravakService";
 import { useEffect, useState } from "react";
 
-export default function SmjerPromjena(){
+export default function PopravakPromjena(){
 
     const navigate = useNavigate()
     const params = useParams()
-    const [smjer,setSmjer] = useState({})
+    const [popravak,setPopravak] = useState({})
     const [aktivan,setAktivan] = useState(false)
 
-    async function ucitajSmjer() {
-        await SmjerService.getBySifra(params.sifra).then((odgovor)=>{
+    async function ucitajPopravak() {
+        await PopravakService.getBySifra(params.sifra).then((odgovor)=>{
             
             const s = odgovor.data
             // po potrebi prilagođavam podatke
             
             s.datumPokretanja = s.datumPokretanja.substring(0,10)
             
-            setSmjer(s)
+            setPopravak(s)
 
             setAktivan(s.aktivan)
         })
     }
 
     useEffect(()=>{
-        ucitajSmjer()
+        ucitajPopravak()
     },[])
 
-    async function promjeni(smjer){
-        //console.table(smjer) // ovo je za kontrolu da li je sve OK
-        await SmjerService.promjeni(params.sifra,smjer).then(()=>{
-            navigate(RouteNames.SMJEROVI)
+    async function promjeni(popravak){
+        //console.table(popravak) // ovo je za kontrolu da li je sve OK
+        await PopravakService.promjeni(params.sifra,popravak).then(()=>{
+            navigate(RouteNames.POPRAVCI)
         })
     }
 
@@ -52,31 +52,31 @@ export default function SmjerPromjena(){
     return(
         <>
         <h3>
-            Unos novog smjera
+            Unos novog popravaka
         </h3>
         <Form onSubmit={odradiSubmit}>
             <Form.Group controlId="naziv">
                 <Form.Label>Naziv</Form.Label>
                 <Form.Control type="text" name="naziv" required 
-                defaultValue={smjer.naziv} />
+                defaultValue={popravak.naziv} />
             </Form.Group>
 
             <Form.Group controlId="trajanje">
                 <Form.Label>Trajanje</Form.Label>
                 <Form.Control type="number" name="trajanje" step={1} 
-                defaultValue={smjer.trajanje}/>
+                defaultValue={popravak.trajanje}/>
             </Form.Group>
 
             <Form.Group controlId="cijena">
                 <Form.Label>Cijena</Form.Label>
                 <Form.Control type="number" name="cijena" step={0.01} 
-                defaultValue={smjer.cijena}/>
+                defaultValue={popravak.cijena}/>
             </Form.Group>
 
             <Form.Group controlId="datumPokretanja">
-                <Form.Label>Datum pokretanja smjera</Form.Label>
+                <Form.Label>Datum pokretanja popravaka</Form.Label>
                 <Form.Control type="date" name="datumPokretanja" 
-                defaultValue={smjer.datumPokretanja}/>
+                defaultValue={popravak.datumPokretanja}/>
             </Form.Group>
 
             <Form.Group controlId="aktivan">
@@ -90,13 +90,13 @@ export default function SmjerPromjena(){
 
             <Row>
                 <Col>
-                    <Link to={RouteNames.SMJEROVI} className="btn btn-danger">
+                    <Link to={RouteNames.POPRAVCI} className="btn btn-danger">
                     Odustani
                     </Link>
                 </Col>
                 <Col>
                     <Button type="submit" variant="success">
-                       Promjeni smjer
+                       Promjeni popravak
                     </Button>
                 </Col>
             </Row>

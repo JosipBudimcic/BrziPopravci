@@ -1,16 +1,16 @@
 import { Button, Col, Form, Row } from "react-bootstrap";
 import { Link, useNavigate } from "react-router-dom";
 import { RouteNames } from "../../constants";
-import SmjerService from "../../services/smjerovi/SmjerService";
+import PopravakService from "../../services/popravci/PopravakService";
 
-export default function SmjerNovi(){
+export default function PopravakNovi(){
 
     const navigate = useNavigate()
 
-    async function dodaj(smjer){
-        //console.table(smjer) // ovo je za kontrolu da li je sve OK
-        await SmjerService.dodaj(smjer).then(()=>{
-            navigate(RouteNames.SMJEROVI)
+    async function dodaj(popravak){
+        //console.table(popravak) // ovo je za kontrolu da li je sve OK
+        await PopravakService.dodaj(popravak).then(()=>{
+            navigate(RouteNames.POPRAVCI)
         })
     }
 
@@ -30,7 +30,7 @@ export default function SmjerNovi(){
     return(
         <>
         <h3>
-            Unos novog smjera
+            Unos novog popravaka
         </h3>
         <Form onSubmit={odradiSubmit}>
             <Form.Group controlId="naziv">
@@ -61,7 +61,7 @@ export default function SmjerNovi(){
 
             <Row>
                 <Col>
-                    <Link to={RouteNames.SMJEROVI} className="btn btn-danger">
+                    <Link to={RouteNames.POPRAVCI} className="btn btn-danger">
                     Odustani
                     </Link>
                 </Col>

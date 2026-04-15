@@ -5,9 +5,9 @@ import Izbornik from './components/Izbornik'
 import { Route, Routes } from 'react-router-dom'
 import { RouteNames } from './constants'
 import Home from './pages/Home'
-import SmjerPregled from './pages/smjerovi/SmjerPregled'
-import SmjerNovi from './pages/smjerovi/SmjerNovi'
-import SmjerPromjena from './pages/smjerovi/SmjerPromjena'
+import PopravakPregled from './pages/popravci/PopravakPregled'
+import PopravakNovi from './pages/popravci/PopravakNovi'
+import PopravakPromjena from './pages/popravci/PopravakPromjena'
 
 function App() {
 
@@ -17,9 +17,9 @@ function App() {
       <Izbornik />
       <Routes>
         <Route path={RouteNames.HOME} element={<Home />} />
-        <Route path={RouteNames.SMJEROVI} element={<SmjerPregled />} />
-        <Route path={RouteNames.SMJEROVI_NOVI} element={<SmjerNovi />} />
-        <Route path={RouteNames.SMJEROVI_PROMJENA} element={<SmjerPromjena />} />
+        <Route path={RouteNames.POPRAVCI} element={<PopravakPregled />} />
+        <Route path={RouteNames.POPRAVCI_NOVI} element={<PopravakNovi />} />
+        <Route path={RouteNames.POPRAVCI_PROMJENA} element={<PopravakPromjena />} />
       </Routes>
       <hr />
       &copy; Josip

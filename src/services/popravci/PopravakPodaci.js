@@ -1,4 +1,4 @@
-export const smjerovi = [
+export const popravci = [
     
     {
         sifra: 1,
