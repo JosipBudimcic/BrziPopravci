@@ -29,7 +29,7 @@ export default function PopravakPregled() {
     }
 
     async function brisanje(sifra) {
-        if(!confirm('Sigurno obrisati')){
+        if(!window.confirm('Sigurno obrisati?')){
             return
         }
         await PopravakService.obrisi(sifra)
@@ -43,7 +43,7 @@ export default function PopravakPregled() {
             className="btn btn-success w-100 mb-3 mt-3">
                 Pregled i dodavanje novog popravka
             </Link>
-            <Table>
+            <Table responsive className="table-hover">
                 <thead>
                     <tr>
                         <th>Naziv</th>
